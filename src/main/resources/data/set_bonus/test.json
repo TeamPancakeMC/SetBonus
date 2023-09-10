@@ -1,0 +1,49 @@
+{
+  "group":[
+      {
+        "type":"armor",
+        "verifier": {
+          "id":"minecraft:diamond_helmet"
+        }
+
+      },
+      {
+        "type": "armor",
+        "verifier": {
+          "id":"minecraft:diamond_chestplate"
+        }
+      },
+      {
+        "type": "armor",
+        "verifier": {
+          "id":"minecraft:diamond_leggings"
+        }
+      },
+      {
+        "type": "armor",
+        "verifier": {
+          "id":"minecraft:diamond_boots"
+        }
+      },
+      {
+        "type": "armor",
+        "verifier": {
+          "id":"minecraft:diamond_sword"
+        }
+      }
+  ],
+  "bonus":[
+      {
+        "type":"attribute",
+        "attribute":"generic.max_health",
+        "amount":10,
+        "operation":0
+      },
+      {
+        "type":"effect",
+        "effect":"minecraft:speed",
+        "duration":100,
+        "level":1
+      }
+  ]
+}

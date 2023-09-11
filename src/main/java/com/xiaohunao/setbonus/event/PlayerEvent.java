@@ -8,6 +8,7 @@ import com.xiaohunao.setbonus.data.SetBonusManager;
 import com.xiaohunao.setbonus.init.GroupRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -25,7 +26,7 @@ public class PlayerEvent {
 
     @SubscribeEvent
     public static void onLivingEquipmentChange(LivingEquipmentChangeEvent event) {
-        LivingEntity entity = event.getEntity();
+        Entity entity = event.getEntity();
         if (entity.level.isClientSide) return;
 
         if (entity instanceof Player player){

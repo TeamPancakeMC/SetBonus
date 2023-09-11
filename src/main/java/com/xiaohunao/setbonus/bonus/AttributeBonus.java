@@ -6,14 +6,15 @@ import com.xiaohunao.setbonus.api.IBonus;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.UUID;
 
 public class AttributeBonus implements IBonus {
-    public static final String NAME = "attribute";
+    public static final String TYPE = "attribute";
     public Attribute attribute;
     public AttributeModifier modifier;
 
@@ -39,8 +40,22 @@ public class AttributeBonus implements IBonus {
     }
 
     @Override
-    public void apply() {
+    public void apply(Player player) {
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance != null) {
+            if (instance.getModifier(modifier.getId()) != null){
+                instance.removeModifier(modifier);
+            }
+            instance.addTransientModifier(modifier);
+        }
+    }
 
+    @Override
+    public void clear(Player player) {
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance != null) {
+            instance.removeModifier(modifier);
+        }
     }
 
     @Override

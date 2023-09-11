@@ -5,10 +5,11 @@ import com.xiaohunao.setbonus.api.IBonus;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EffectBonus implements IBonus {
-    public static final String NAME = "effect";
+    public static final String TYPE = "effect";
     public MobEffectInstance effect;
 
     public static class Builder {
@@ -24,11 +25,11 @@ public class EffectBonus implements IBonus {
             this.effect = value;
         }
 
-        public Builder setEffect(int duration, int amplifier) {
+        public Builder setEffect(int level) {
             if (this.effect == null){
                 throw new RuntimeException("Effect already set");
             }
-            bonus.effect = new MobEffectInstance(this.effect, duration, amplifier);
+            bonus.effect = new MobEffectInstance(this.effect, -1, level);
             return this;
         }
 
@@ -37,14 +38,19 @@ public class EffectBonus implements IBonus {
         }
     }
     @Override
-    public void apply() {
+    public void apply(Player player) {
+        player.addEffect(effect);
+    }
 
+    @Override
+    public void clear(Player player) {
+        player.removeEffect(effect.getEffect());
     }
 
     @Override
     public IBonus read(JsonObject asJsonObject) {
         EffectBonus.Builder builder = new EffectBonus.Builder(asJsonObject.get("effect").getAsString())
-                .setEffect(asJsonObject.get("duration").getAsInt(), asJsonObject.get("amplifier").getAsInt());
+                .setEffect(asJsonObject.get("level").getAsInt());
         return builder.build();
     }
 }

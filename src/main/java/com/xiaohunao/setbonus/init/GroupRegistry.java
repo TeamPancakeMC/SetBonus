@@ -2,9 +2,7 @@ package com.xiaohunao.setbonus.init;
 
 import com.google.common.collect.Maps;
 import com.xiaohunao.setbonus.api.IGroup;
-import com.xiaohunao.setbonus.group.ArmorGroup;
-import com.xiaohunao.setbonus.group.MainHandGroup;
-import com.xiaohunao.setbonus.group.OffHandGroup;
+import com.xiaohunao.setbonus.group.*;
 
 import java.util.Map;
 
@@ -18,8 +16,12 @@ public class GroupRegistry {
         return Group.get(name);
     }
     public static void register(){
-        registerBonus(ArmorGroup.NAME, new ArmorGroup());
-        registerBonus(MainHandGroup.NAME, new MainHandGroup());
-        registerBonus(OffHandGroup.NAME, new OffHandGroup());
+        registerBonus(MainHandGroup.TYPE, new MainHandGroup());
+        registerBonus(OffHandGroup.TYPE, new OffHandGroup());
+        registerBonus(SelectedGroup.TYPE, new SelectedGroup());
+        registerBonus(HeadGroup.TYPE, new HeadGroup());
+        registerBonus(ChestGroup.TYPE, new ChestGroup());
+        registerBonus(LegsGroup.TYPE, new LegsGroup());
+        registerBonus(FeetGroup.TYPE, new FeetGroup());
     }
 }

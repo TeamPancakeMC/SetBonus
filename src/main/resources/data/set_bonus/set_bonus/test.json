@@ -1,7 +1,7 @@
 {
   "group":[
       {
-        "type":"armor",
+        "type":"head",
         "verifier": {
           "type": "id",
           "item":"minecraft:diamond_helmet"
@@ -9,28 +9,28 @@
 
       },
       {
-        "type": "armor",
+        "type": "chest",
         "verifier": {
           "type": "id",
           "item":"minecraft:diamond_chestplate"
         }
       },
       {
-        "type": "armor",
+        "type": "legs",
         "verifier": {
           "type": "id",
           "item":"minecraft:diamond_leggings"
         }
       },
       {
-        "type": "armor",
+        "type": "feet",
         "verifier": {
           "type": "id",
           "item":"minecraft:diamond_boots"
         }
       },
       {
-        "type": "armor",
+        "type": "main_hand",
         "verifier": {
           "type": "id",
           "item":"minecraft:diamond_sword"
@@ -47,7 +47,6 @@
       {
         "type":"effect",
         "effect":"minecraft:speed",
-        "duration":100,
         "level":1
       }
   ]

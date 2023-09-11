@@ -1,10 +1,11 @@
 package com.xiaohunao.setbonus.api;
 
 import com.google.gson.JsonObject;
-import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraft.world.entity.player.Player;
 
 public interface IBonus {
-    void apply();
+    void apply(Player player);
+    void clear(Player player);
 
     IBonus read(JsonObject asJsonObject);
 }

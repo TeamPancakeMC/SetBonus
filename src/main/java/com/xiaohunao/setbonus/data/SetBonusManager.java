@@ -33,14 +33,14 @@ public class SetBonusManager extends SimpleJsonResourceReloadListener {
         for (Map.Entry<ResourceLocation, JsonElement> entry : jsonElementMap.entrySet()) {
             ResourceLocation resourcelocation = entry.getKey();
             JsonElement value = entry.getValue();
-            List<IBonus> bonuses = GsonHelper.convertToJsonArray(value, "bonus").asList().stream()
+            List<IBonus> bonuses = value.getAsJsonObject().get("bonus").getAsJsonArray().asList().stream()
                     .map(JsonElement::getAsJsonObject)
                     .map(jsonObject -> {
                         String type = GsonHelper.getAsString(jsonObject, "type");
                         return BonusRegistry.getBonus(type).read(jsonObject);
                     })
                     .toList();
-            List<IGroup> groups = GsonHelper.convertToJsonArray(value, "group").asList().stream()
+            List<IGroup> groups = value.getAsJsonObject().get("group").getAsJsonArray().asList().stream()
                     .map(JsonElement::getAsJsonObject)
                     .map(jsonObject -> {
                         String type = GsonHelper.getAsString(jsonObject, "type");

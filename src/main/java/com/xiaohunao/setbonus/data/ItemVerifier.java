@@ -24,26 +24,26 @@ public class ItemVerifier {
                 GsonHelper.getAsString(verifier, "item"));
     }
 
-//    public boolean isValid(ResourceLocation item_Key){
-//        Item item = ForgeRegistries.ITEMS.getValue(item_Key);
-//        if (item == null){
-//            return false;
-//        }
-//        if (id != null) {
-//            return item_Key.toString().equals(id);
-//        }
-//        if (tag != null) {
-//            TagKey<Item> itemTag = TagKey.create(Registries.ITEM, new ResourceLocation(tag));
-//            ItemStack stack = new ItemStack(item);
-//            return stack.is(itemTag);
-//        }
-//        if (class_name != null) {
-//            try {
-//                return Class.forName(class_name).isAssignableFrom(item.getClass());
-//            } catch (ClassNotFoundException e) {
-//                throw new RuntimeException("Json解析错误,verifier找不到类: " + class_name,e);
-//            }
-//        }
-//        return false;
-//    }
+    public boolean verify(ItemStack stack) {
+        ResourceLocation key = ForgeRegistries.ITEMS.getKey(stack.getItem());
+        switch (type) {
+            case "id" -> {
+                return key != null && key.toString().equals(item);
+            }
+            case "tag" -> {
+                TagKey<Item> itemTag = TagKey.create(Registries.ITEM, new ResourceLocation(item));
+                return stack.is(itemTag);
+            }
+            case "class" -> {
+                try {
+                    return Class.forName(item).isAssignableFrom(stack.getItem().getClass());
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException("Class " + item + " not found");
+                }
+            }
+            default -> throw new RuntimeException("Unknown type " + type);
+        }
+    }
+
+
 }

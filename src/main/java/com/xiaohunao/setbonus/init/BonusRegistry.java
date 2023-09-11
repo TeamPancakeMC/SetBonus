@@ -17,7 +17,7 @@ public class BonusRegistry {
         return Bonus.get(name);
     }
     public static void register(){
-        registerBonus(EffectBonus.NAME, new EffectBonus());
-        registerBonus(AttributeBonus.NAME,new AttributeBonus());
+        registerBonus(EffectBonus.TYPE, new EffectBonus());
+        registerBonus(AttributeBonus.TYPE,new AttributeBonus());
     }
 }

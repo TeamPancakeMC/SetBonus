@@ -1,5 +1,6 @@
 package com.xiaohunao.setbonus.bonus;
 
+import com.google.gson.JsonObject;
 import com.xiaohunao.setbonus.api.IBonus;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -38,5 +39,12 @@ public class EffectBonus implements IBonus {
     @Override
     public void apply() {
 
+    }
+
+    @Override
+    public IBonus read(JsonObject asJsonObject) {
+        EffectBonus.Builder builder = new EffectBonus.Builder(asJsonObject.get("effect").getAsString())
+                .setEffect(asJsonObject.get("duration").getAsInt(), asJsonObject.get("amplifier").getAsInt());
+        return builder.build();
     }
 }

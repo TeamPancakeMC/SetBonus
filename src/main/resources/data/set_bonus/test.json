@@ -3,32 +3,37 @@
       {
         "type":"armor",
         "verifier": {
-          "id":"minecraft:diamond_helmet"
+          "type": "id",
+          "item":"minecraft:diamond_helmet"
         }
 
       },
       {
         "type": "armor",
         "verifier": {
-          "id":"minecraft:diamond_chestplate"
+          "type": "id",
+          "item":"minecraft:diamond_chestplate"
         }
       },
       {
         "type": "armor",
         "verifier": {
-          "id":"minecraft:diamond_leggings"
+          "type": "id",
+          "item":"minecraft:diamond_leggings"
         }
       },
       {
         "type": "armor",
         "verifier": {
-          "id":"minecraft:diamond_boots"
+          "type": "id",
+          "item":"minecraft:diamond_boots"
         }
       },
       {
         "type": "armor",
         "verifier": {
-          "id":"minecraft:diamond_sword"
+          "type": "id",
+          "item":"minecraft:diamond_sword"
         }
       }
   ],

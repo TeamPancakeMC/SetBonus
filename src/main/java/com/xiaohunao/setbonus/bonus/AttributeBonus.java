@@ -1,10 +1,13 @@
 package com.xiaohunao.setbonus.bonus;
 
+import com.google.gson.JsonObject;
 import com.xiaohunao.setbonus.SetBonus;
 import com.xiaohunao.setbonus.api.IBonus;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.UUID;
@@ -38,5 +41,12 @@ public class AttributeBonus implements IBonus {
     @Override
     public void apply() {
 
+    }
+
+    @Override
+    public IBonus read(JsonObject asJsonObject) {
+        AttributeBonus.Builder builder = new AttributeBonus.Builder(GsonHelper.getAsString(asJsonObject, "attribute"))
+                .setModifier(GsonHelper.getAsFloat(asJsonObject, "amount"), GsonHelper.getAsInt(asJsonObject, "operation"));
+        return builder.build();
     }
 }

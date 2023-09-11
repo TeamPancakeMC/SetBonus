@@ -1,7 +1,7 @@
 package com.xiaohunao.setbonus.group;
 
-import com.xiaohunao.setbonus.api.IGroup;
 
-public class OffHandGroup implements IGroup {
+
+public class OffHandGroup extends AbsGroup {
     public static final String NAME = "off_hand";
 }

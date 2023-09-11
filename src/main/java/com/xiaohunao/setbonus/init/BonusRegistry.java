@@ -8,11 +8,14 @@ import com.xiaohunao.setbonus.bonus.EffectBonus;
 import java.util.Map;
 
 public class BonusRegistry {
-    public static Map<String, IBonus> Bonus = Maps.newHashMap();
+    private static Map<String, IBonus> Bonus = Maps.newHashMap();
     public static void registerBonus(String name, IBonus bonus) {
         Bonus.put(name, bonus);
     }
 
+    public static IBonus getBonus(String name) {
+        return Bonus.get(name);
+    }
     public static void register(){
         registerBonus(EffectBonus.NAME, new EffectBonus());
         registerBonus(AttributeBonus.NAME,new AttributeBonus());

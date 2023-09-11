@@ -1,5 +1,6 @@
 package com.xiaohunao.setbonus.data;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.*;
 import com.xiaohunao.setbonus.SetBonus;
@@ -33,20 +34,17 @@ public class SetBonusManager extends SimpleJsonResourceReloadListener {
         for (Map.Entry<ResourceLocation, JsonElement> entry : jsonElementMap.entrySet()) {
             ResourceLocation resourcelocation = entry.getKey();
             JsonElement value = entry.getValue();
-            List<IBonus> bonuses = value.getAsJsonObject().get("bonus").getAsJsonArray().asList().stream()
-                    .map(JsonElement::getAsJsonObject)
-                    .map(jsonObject -> {
-                        String type = GsonHelper.getAsString(jsonObject, "type");
-                        return BonusRegistry.getBonus(type).read(jsonObject);
-                    })
-                    .toList();
-            List<IGroup> groups = value.getAsJsonObject().get("group").getAsJsonArray().asList().stream()
-                    .map(JsonElement::getAsJsonObject)
-                    .map(jsonObject -> {
-                        String type = GsonHelper.getAsString(jsonObject, "type");
-                        return GroupRegistry.getGroup(type).read(jsonObject);
-                    })
-                    .toList();
+            List<IBonus> bonuses = Lists.newArrayList();
+            value.getAsJsonObject().get("bonus").getAsJsonArray().forEach(jsonElement -> {
+                String type = GsonHelper.getAsString(jsonElement.getAsJsonObject(), "type");
+                bonuses.add(BonusRegistry.getBonus(type).read(jsonElement.getAsJsonObject()));
+            });
+            List<IGroup> groups = Lists.newArrayList();
+            value.getAsJsonObject().get("group").getAsJsonArray().forEach(jsonElement -> {
+                String type = GsonHelper.getAsString(jsonElement.getAsJsonObject(), "type");
+                groups.add(GroupRegistry.getGroup(type).read(jsonElement.getAsJsonObject()));
+            });
+
             groupMap.put(resourcelocation, groups);
             bonusMap.put(resourcelocation, bonuses);
         }

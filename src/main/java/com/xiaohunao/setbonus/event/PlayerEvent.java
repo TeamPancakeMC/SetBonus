@@ -26,7 +26,7 @@ public class PlayerEvent {
     @SubscribeEvent
     public static void onLivingEquipmentChange(LivingEquipmentChangeEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity.level().isClientSide) return;
+        if (entity.level.isClientSide) return;
 
         if (entity instanceof Player player){
             for (Map.Entry<ResourceLocation, List<IGroup>> entry : SetBonusManager.groupMap.entrySet()) {

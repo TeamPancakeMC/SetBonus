@@ -29,7 +29,7 @@ public class EffectBonus implements IBonus {
             if (this.effect == null){
                 throw new RuntimeException("Effect already set");
             }
-            bonus.effect = new MobEffectInstance(this.effect, -1, level);
+            bonus.effect = new MobEffectInstance(this.effect, Integer.MAX_VALUE, level);
             return this;
         }
 
